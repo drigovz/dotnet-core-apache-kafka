@@ -17,7 +17,9 @@ namespace Kafka.Core.kafkaEvents.UserRegistration.Handlers
 
         public Task HandleAsync(string key, RegisterUser value)
         {
-            Console.WriteLine($"Consuming RegisterUser topic message with the below data\n {{ \nFirstName: {value.FirstName}\n LastName: {value.LastName}\n UserName: {value.UserName}\n EmailId: {value.EmailId}\n }}\n");
+            Console.WriteLine($"Consuming RegisterUser topic message with the below data\n {{ \n  FirstName: {value.FirstName}\n  LastName: {value.LastName}\n  UserName: {value.UserName}\n  EmailId: {value.EmailId}\n }}\n");
+
+            // its posssible to call service methods, to do actions or save objects on database
 
             _producer.ProduceAsync(KafkaTopics.UserRegistered, "", new UserRegistered { UserId = 1 });
 
