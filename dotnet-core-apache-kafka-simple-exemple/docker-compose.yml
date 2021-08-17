@@ -3,32 +3,20 @@ version: "3.7"
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
-    user: root
     networks: 
       - dev-network
-    volumes:
-      - C:\containers\zookeeper\datalog:/datalog
-      - C:\containers\zookeeper\log:/var/lib/zookeeper/log
-      - C:\containers\zookeeper\secrets:/etc/zookeeper/secrets
-      - C:\containers\zookeeper\data:/var/lib/zookeeper/data
-      # - C:\containers\zookeeper\conf:/opt/zookeeper-3.4.13/conf
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
     image: confluentinc/cp-kafka:latest
-    container_name: kafka
-    user: root
     networks: 
       - dev-network
     depends_on:
       - zookeeper
     ports:
       - 9092:9092
-    volumes: 
-      - C:\containers\kafka:/bitnami/kafka
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -39,8 +27,6 @@ services:
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
-    container_name: kafdrop
-    user: root
     networks: 
       - dev-network
     depends_on:
