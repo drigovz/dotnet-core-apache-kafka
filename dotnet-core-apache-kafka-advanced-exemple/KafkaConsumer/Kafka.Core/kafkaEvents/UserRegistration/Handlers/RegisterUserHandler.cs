@@ -17,7 +17,7 @@ namespace Kafka.Core.kafkaEvents.UserRegistration.Handlers
 
         public Task HandleAsync(string key, RegisterUser value)
         {
-            Console.WriteLine($"Consuming UserRegistered topic message with the below data\n FirstName: {value.FirstName}\n LastName: {value.LastName}\n UserName: {value.UserName}\n EmailId: {value.EmailId}");
+            Console.WriteLine($"Consuming RegisterUser topic message with the below data\n {{ \nFirstName: {value.FirstName}\n LastName: {value.LastName}\n UserName: {value.UserName}\n EmailId: {value.EmailId}\n }}\n");
 
             _producer.ProduceAsync(KafkaTopics.UserRegistered, "", new UserRegistered { UserId = 1 });
 
